@@ -1,0 +1,26 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool: linux
+
+steps:
+- task: Docker@2
+  inputs:
+    containerRegistry: 'docker'
+    repository: 'ravitejak541/goapp'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+
+- task: SnykSecurityScan@1
+  inputs:
+    serviceConnectionEndpoint: 'synk'
+    testType: 'container'
+    dockerImageName: 'ravitejak541/goapp:$(Build.BuildId)'
+    monitorWhen: 'always'
+    failOnIssues: true
+
