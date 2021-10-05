@@ -1,6 +1,6 @@
 FROM golang:alpine as build
 RUN mkdir /go-temp
-ADD go.mod main.go /go-temp
+ADD go.mod main.go /go-temp/
 WORKDIR /go-temp
 RUN go build -o go-webapp .
 
