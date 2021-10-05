@@ -11,8 +11,7 @@ trigger:
     include:
       - terraform/*
 
-pool:
-  vmImage: linux
+pool: linux
 
 steps:
 - task: TerraformTaskV2@2
