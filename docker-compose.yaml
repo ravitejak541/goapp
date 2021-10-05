@@ -1,0 +1,14 @@
+version: '3.4'
+services:
+  go-app:
+    container_name: go-webapp
+    hostname: go-webapp
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "3030:3030"
+    deploy:
+      mode: replicated
+      replicas: 1
+    restart: "always"
