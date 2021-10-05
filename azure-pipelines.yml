@@ -4,7 +4,12 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+  branches:
+    include:
+      - master
+  paths:
+    exclude:
+      - terraform/*
 
 pool: linux
 
@@ -24,3 +29,28 @@ steps:
     monitorWhen: 'always'
     failOnIssues: true
 
+- task: replacetokens@4
+  inputs:
+    rootDirectory: '$(Build.SourcesDirectory)/kubernetes/'
+    targetFiles: '**/*.yaml'
+    encoding: 'auto'
+    tokenPattern: 'octopus'
+    writeBOM: true
+    actionOnMissing: 'warn'
+    keepToken: false
+    actionOnNoFiles: 'continue'
+    enableTransforms: false
+    useLegacyPattern: false
+    enableTelemetry: true
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: 'kubernetes/'
+    Contents: '**/*.yaml'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'manifest'
+    publishLocation: 'Container'
