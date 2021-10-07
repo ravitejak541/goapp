@@ -48,7 +48,7 @@ func Health(w http.ResponseWriter, r *http.Request) {
 
 func Hello(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprintf(w, "%s: responding from the go-web-server 👋", serverID)
+	fmt.Fprintf(w, "%s: response from the go-web-server 👋", serverID)
 }
 
 func Keyword(w http.ResponseWriter, r *http.Request) {
