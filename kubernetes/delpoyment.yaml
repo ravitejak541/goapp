@@ -33,8 +33,15 @@ spec:
             port: 3030
           initialDelaySeconds: 5
           periodSeconds: 5
-          failureThreshold: 2
+          failureThreshold: 3
           timeoutSeconds: 3
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"        
 ---
 apiVersion: v1
 kind: Service
