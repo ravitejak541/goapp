@@ -52,7 +52,7 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 }
 
 func Keyword(w http.ResponseWriter, r *http.Request) {
-	phrase, _ := base64.StdEncoding.DecodeString("Z3JlZW4K")
+	phrase, _ := base64.StdEncoding.DecodeString("Ymx1ZQo=")
 
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprintf(w, "%s: %s", serverID, phrase)
