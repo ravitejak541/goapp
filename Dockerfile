@@ -4,7 +4,7 @@ ADD go.mod main.go /go-temp/
 WORKDIR /go-temp
 RUN go build -o go-webapp .
 
-FROM alpine
+FROM alpine:3.15.3
 COPY --from=build /go-temp/go-webapp .
 RUN addgroup -S svcgrp && adduser -S svcuser -G svcgrp && apk add curl
 EXPOSE 3030 
